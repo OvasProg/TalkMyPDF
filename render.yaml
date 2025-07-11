@@ -16,7 +16,7 @@ services:
       - key: COHERE_KEY
         sync: false
       - key: GOOGLE_APPLICATION_CREDENTIALS
-        value: keys/talkmypdf-ff957664b289.json
+        value: /etc/secrets/talkmypdf-ff957664b289.json
 databases:
   - name: talkmypdf-db
     databaseName: talkmypdf
