@@ -17,6 +17,9 @@ def generate_audio(text, voice="male"):
 
     audio_content = b""
     for sentence in sentences:
+        if not sentence.strip():
+            continue
+        
         input_text = texttospeech.SynthesisInput(text=sentence)
         voice = texttospeech.VoiceSelectionParams(
             language_code="en-US",
