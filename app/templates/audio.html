@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Audio Result - TalkMyPDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>TalkMyPDF</h1>
+        <a href="{{ url_for('auth.logout') }}" class="button" id="logout">Log Out</a>
+    </header>
+
+    <main class="tools-main">
+        <h2>📄Text Extracted Successfully </h2>
+        <h3> Note: Only the first 5,000 characters will be processed for audio conversion. </h3>
+        <p> To include more content, please split your document into smaller sections. </p>
+        <div class="button-group audio-buttons">
+    <div class="button-row">
+        <form method="POST" action="{{ url_for('dashboard.download_audio') }}">
+            <textarea name="audio_text" hidden>{{ text }}</textarea>
+            <input type="hidden" name="voice" value="male">
+            <button type="submit" class="button download-button">⬇️ Male Voice</button>
+        </form>
+                <form method="POST" action="{{ url_for('dashboard.download_audio') }}">
+                    <textarea name="audio_text" hidden>{{ text }}</textarea>
+                    <input type="hidden" name="voice" value="female">
+                    <button type="submit" class="button download-button">⬇️ Female Voice</button>
+                </form>
+            </div>
+            <a href="{{ url_for('dashboard.dashboard') }}" class="button back-link">← Back to Dashboard</a>
+        </div>
+    </main>
+</body>
+</html>

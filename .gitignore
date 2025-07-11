@@ -1,0 +1,52 @@
+# Byte-compiled / optimized / DLL files
+__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pdb
+
+# Virtual environments
+.venv/
+env/
+venv/
+
+# Editor-specific
+.vscode/
+.idea/
+*.sublime-project
+*.sublime-workspace
+
+# System-specific
+.DS_Store
+Thumbs.db
+
+# Flask instance and SQLite DB
+instance/
+*.db
+*.sqlite3
+
+# Environment files
+.env
+*.env.local
+*.env.*.local
+*.key
+keys/
+
+# Flask migration logs
+migrations/*.log
+
+# Pytest cache and coverage
+.pytest_cache/
+.coverage
+htmlcov/
+
+# Compiled or cached files
+*.log
+*.bak
+*.swp
+*.tmp
+
+# OS/other
+snapshot
+all_code_snapshot.txt
+example.pdf

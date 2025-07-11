@@ -1,0 +1,23 @@
+services:
+  - type: web
+    name: talkmypdf
+    env: python
+    buildCommand: pip install -r requirements.txt
+    startCommand: flask db upgrade && gunicorn run:app
+    envVars:
+      - key: FLASK_ENV
+        value: production
+      - key: FLASK_SECRET_KEY
+        sync: false
+      - key: DATABASE_URL
+        fromDatabase:
+          name: talkmypdf-db
+          property: connectionString
+      - key: COHERE_KEY
+        sync: false
+      - key: GOOGLE_APPLICATION_CREDENTIALS
+        value: keys/talkmypdf-ff957664b289.json
+databases:
+  - name: talkmypdf-db
+    databaseName: talkmypdf
+    user: talkmypdf_user

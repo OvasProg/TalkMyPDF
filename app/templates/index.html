@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>TalkMyPDF - Home</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>TalkMyPDF</h1>
+        <a href="{{ url_for('auth.login') }}" class="button">Login</a>
+    </header>
+
+    <main class="home-main">
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <p class="error">{{ messages[0] }}</p>
+                {% endif %}
+            {% endwith %}
+        <h2>Transform Your PDFs into Voice, Summary & More</h2>
+        <p>Welcome to <strong>TalkMyPDF</strong> – your intelligent toolkit for extracting maximum value from PDF documents. Whether you're commuting, researching, or studying, we've got you covered.</p>
+
+        <div class="feature-grid">
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/summary.png') }}" alt="Summarization">
+                <h3>PDF Summarization</h3>
+                <p class="feature-desc">Get concise summaries of lengthy PDFs in just seconds, saving you valuable time.</p>
+            </div>
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/speech.png') }}" alt="Text to Speech">
+                <h3>Text-to-Speech</h3>
+                <p class="feature-desc">Convert PDF text into natural-sounding audio for learning on the go.</p>
+            </div>
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/question.png') }}" alt="Question Generation">
+                <h3>Question Generation</h3>
+                <p class="feature-desc">Generate quiz-style questions from your PDFs to boost understanding and retention.</p>
+            </div>
+            <div class="feature-card">
+                <img src="{{ url_for('static', filename='images/translate.png') }}" alt="Document Translation">
+                <h3>Document Translation</h3>
+                <p class="feature-desc">Translate entire PDF documents into multiple languages quickly and accurately.</p>
+            </div>
+        </div>
+
+<h3>Perfect For...</h3>
+<div class="use-case-grid-wrapper">
+    <div class="use-case-strip">
+        <div class="use-case-tile">
+            <span class="emoji">📚</span>
+        <div>
+            <strong>Students</strong>
+            <p>Learn faster with summaries and quizzes.</p>
+        </div>
+        </div>
+        <div class="use-case-tile">
+            <span class="emoji">👨‍💼</span>
+            <div>
+                <strong>Professionals</strong>
+                <p>Listen to reports and save reading time.</p>
+            </div>
+        </div>
+        <div class="use-case-tile">
+            <span class="emoji">🌐</span>
+            <div>
+                <strong>Language Learners</strong>
+                <p>Translate and understand new content easily.</p>
+            </div>
+        </div>
+        <div class="use-case-tile">
+            <span class="emoji">💡</span>
+            <div>
+                <strong>Educators</strong>
+                <p>Generate questions from material instantly.</p>
+            </div>
+        </div>
+    </div>
+</div>
+
+<h3>What Users Are Saying</h3>
+<div class="testimonial-grid">
+    <div class="testimonial-card">
+        <p>"TalkMyPDF saved me hours of reading before my exam!"</p>
+        <span>– Anna, Student</span>
+    </div>
+    <div class="testimonial-card">
+        <p>"I listen to whitepapers during my commute – it's a game changer."</p>
+        <span>– James, Product Manager</span>
+    </div>
+</div>
+
+<div class="privacy-box">
+    <span class="lock-icon">🔒</span>
+    <div>
+        <h4>Your Privacy Matters</h4>
+        <p>Uploaded PDFs are processed securely and deleted after processing. We never store your data.</p>
+    </div>
+</div>
+        <div class="link">
+            <p><a href="{{ url_for('auth.signup') }}">Create an account</a>
+                or <a href="{{ url_for('auth.login') }}">log in</a>
+                to get started. It's totally free!</p>
+        </div>
+    </main>
+</body>
+</html>

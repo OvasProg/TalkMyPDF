@@ -1,0 +1,116 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Dashboard - TalkMyPDF</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='css/style.css') }}">
+</head>
+<body>
+    <header>
+        <h1>TalkMyPDF</h1>
+        <a href="{{ url_for('auth.logout') }}" class="button" id="logout">Log Out</a>
+    </header>
+
+    <main class="home-main">
+        {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <p class="error">{{ messages[0] }}</p>
+                {% endif %}
+            {% endwith %}
+        <h2>Your PDF Assistant</h2>
+        <p>You can use each tool up to <strong>3 times per day</strong>.</p>
+
+        <form method="POST" enctype="multipart/form-data" id="pdf-form">
+            <div class="dropzone" id="dropzone">
+                <input type="file" id="pdf" name="pdf_file" accept=".pdf" required hidden>
+                <span class="drop-icon">📄</span>
+                <p id="dropzone-text">Drag & drop your PDF here or click to browse</p>
+            </div>
+
+            <input type="hidden" name="action" id="selected-action">
+
+            <div class="feature-grid">
+    <button type="button" class="feature-card" onclick="handleSubmit('summarize')" {% if limits['summary'] == 0 %}disabled{% endif %}>
+        <span class="emoji">📝</span>
+        <h3>Summarize PDF</h3>
+        <p>Quickly extract the key ideas from your document.</p>
+        <p class="usage-info">Uses left today: {{ limits['summary'] }}</p>
+    </button>
+
+    <button type="button" class="feature-card" onclick="handleSubmit('audio')" {% if limits['audio'] == 0 %}disabled{% endif %}>
+        <span class="emoji">🔊</span>
+        <h3>Convert to Audio</h3>
+        <p>Listen to your PDF in natural-sounding voice.</p>
+        <p class="usage-info">Uses left today: {{ limits['audio'] }}</p>
+    </button>
+
+    <button type="button" class="feature-card" onclick="handleSubmit('translate')" {% if limits['translate'] == 0 %}disabled{% endif %}>
+        <span class="emoji">🌍</span>
+        <h3>Translate PDF</h3>
+        <p>Convert your document into multiple languages.</p>
+        <p class="usage-info">Uses left today: {{ limits['translate'] }}</p>
+    </button>
+
+    <button type="button" class="feature-card" onclick="handleSubmit('questions')" {% if limits['questions'] == 0 %}disabled{% endif %}>
+        <span class="emoji">❓</span>
+        <h3>Generate Questions</h3>
+        <p>Create study questions from your document content.</p>
+        <p class="usage-info">Uses left today: {{ limits['questions'] }}</p>
+    </button>
+</div>
+        </form>
+    </main>
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+    const dropzone = document.getElementById('dropzone');
+    const input = document.getElementById('pdf');
+    const text = document.getElementById('dropzone-text');
+    const form = document.getElementById('pdf-form');
+
+    const routes = {
+        summarize: "{{ url_for('dashboard.summary') }}",
+        audio: "{{ url_for('dashboard.audio') }}",
+        translate: "{{ url_for('dashboard.translate') }}",
+        questions: "{{ url_for('dashboard.questions') }}"
+    };
+
+    dropzone.addEventListener('click', () => input.click());
+
+    dropzone.addEventListener('dragover', e => {
+        e.preventDefault();
+        dropzone.classList.add('dragover');
+    });
+
+    dropzone.addEventListener('dragleave', () => {
+        dropzone.classList.remove('dragover');
+    });
+
+    dropzone.addEventListener('drop', e => {
+        e.preventDefault();
+        dropzone.classList.remove('dragover');
+        const file = e.dataTransfer.files[0];
+        if (file) {
+            input.files = e.dataTransfer.files;
+            text.textContent = file.name;
+        }
+    });
+
+    input.addEventListener('change', () => {
+        if (input.files.length > 0) {
+            text.textContent = input.files[0].name;
+        }
+    });
+
+    window.handleSubmit = function(action) {
+        if (!input.files || input.files.length === 0) {
+            alert("Please upload a PDF file first.");
+            return;
+        }
+        document.getElementById('selected-action').value = action;
+        form.action = routes[action];
+        form.submit();
+    }
+});
+</script>
+</body>
+</html>
