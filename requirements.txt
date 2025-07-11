@@ -14,7 +14,7 @@ cohere==5.16.1
 deep-translator==1.11.4
 google-cloud-texttospeech==2.15.1
 protobuf==3.20.3
-psycopg2==2.9.9
+psycopg2-binary==2.9.9
 
 # Testing
 pytest==8.4.1
