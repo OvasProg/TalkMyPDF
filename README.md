@@ -9,6 +9,10 @@ TalkMyPDF is an AI-powered Flask web application that allows users to upload PDF
 
 It’s built with modularity, security, and scalability in mind — powered by Cohere AI, Google Cloud TTS, and PostgreSQL.
 
+## ✅ Live Demo
+
+🟢 Available at:
+[Render](https://talkmypdf.onrender.com)
 
 ## 🚀 Features
 
@@ -107,11 +111,6 @@ flask db upgrade
 ```git
 python run.py
 ```
-
-## ✅ Live Demo
-
-🟢 Available at:
-[Render](https://talkmypdf.onrender.com)
 
 ## 💬 Future Improvements
 - User usage dashboard with visual stats
